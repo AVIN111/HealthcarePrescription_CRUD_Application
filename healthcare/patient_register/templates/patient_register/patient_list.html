@@ -1,0 +1,44 @@
+{% extends "patient_register/base.html" %}
+
+
+{% block content %}
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>Patient</td>
+            <td>Date</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Age</td>
+            <td>
+                <a href="{% url 'patient_insert' %}" class="btn btn-outline-success">
+                    <i class="fas fa-plus"></i> Add New
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for patient in patient_list %}
+            <tr>
+                <td><img src="{{ patient.profile.url }}" alt="image" height="100px" width="100px"></td>
+                <td>{{ patient.date }}</td>
+                <td>{{ patient.firstname }}</td>
+                <td>{{ patient.lastname }}</td>
+                <td>{{ patient.age }}</td>
+                <td>
+                    <a href="{% url 'patient_update' patient.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'patient_delete' patient.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

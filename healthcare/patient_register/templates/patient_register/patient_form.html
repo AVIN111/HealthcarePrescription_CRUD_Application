@@ -1,0 +1,55 @@
+{% extends "patient_register/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+    {% csrf_token %}  
+    
+    <div class="row">
+        <div class="col-md-5">
+            {{ form.firstname|as_crispy_field }}
+        </div>
+        <div class="col-md-5">
+            {{ form.lastname|as_crispy_field }}
+        </div>
+        <div class="col-md-2">
+            {{ form.age|as_crispy_field }}
+        </div>
+    </div>
+    {{ form.Address|as_crispy_field }}
+    <div class="row">
+        <div class="col-md-4">
+            {{ form.gender|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{ form.department|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{ form.allergic|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form.precondition|as_crispy_field }}
+        </div>
+        
+        <div class="col-md-6">
+            {{ form.height|as_crispy_field }}
+        </div>
+    </div>
+    <p><h2>Patient Image Upload here: </h2></p>
+    {{ form.profile|as_crispy_field }}
+
+    <div class="row">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
+                Submit</button>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'patient_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Back to list
+            </a>
+        </div>
+    </div>
+
+</form>
+{% endblock content %}
