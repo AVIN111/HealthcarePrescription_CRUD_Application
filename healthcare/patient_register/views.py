@@ -2,12 +2,13 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from .forms import PatientForm
 from .models import Patient
+from django.views.generic.list import ListView
 
 # Create your views here.
+class Patient_list(ListView):
+    model = Patient
+    template_name = "patient_register/patient_list.html"
 
-def patient_list(request):
-    context = {'patient_list': Patient.objects.all()}
-    return render(request, "patient_register/patient_list.html", context)
 
 def patient_form(request, id=0):
     if request.method == "GET":
@@ -32,6 +33,9 @@ def patient_delete(request, id):
     patient.delete()
     return redirect('/patient/list')
 
+def patient_list(request):
+    context = {'patient_list': Patient.objects.all()}
+    return render(request, "patient_register/patient_list.html", context)
    
 
 
